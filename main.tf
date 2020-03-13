@@ -90,7 +90,7 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = var.disable_password_authentication
     ssh_keys {
       path     = "/home/${var.os_admin_username}/.ssh/authorized_keys"
-      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChe0xfuNe7yJUeB64MBsLjShb7mhdSo0uUwAUNbvxoKu1yZXBeCZLec9uHD1jJW0RpVniB0pz/fVIeCSKsbdMOAsWHDtV/bv7TTuzYVnEbN4KrAT3WykTMdzAJEwspO5h41r6mKhn2xzkuPiJRqqmP6odDgYXbzo8gpSqZbohIq+8dhIZ5FBYwjcNU8EBZYKaCLwcsp5njF8vwzwTJr6A0fPMrynuZErEw4kqsxHBeaxRIGVHecqwci6agkG+64jFrMUOVDrwMYrR24TgeuAE6ycnQ8bU60YlHbJfWe/95PzF53Z/3fDC/sBX4mVmtAEQI2CFty7v8hey8+7v9Tylj aparaschiv@ROAPARASCHIV03M"
+      key_data = "TOCOMPLETE"
     }
   } 
   tags = {
