@@ -1,0 +1,1 @@
+./create_storage_account.sh bootcamptfstatestg westeurope Standard_LRS tfstate bootcamp-terraform westeurope
