@@ -5,6 +5,15 @@ provider "azurerm" {
   features {}
 }
 
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "bootcamp-terraform"
+    storage_account_name = "bootcamptfstatestg"
+    container_name       = "tfstate"
+    key                  = "bootcampdev.tfstate"
+  }
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = "${var.prefix}-resources"
   location = var.location
