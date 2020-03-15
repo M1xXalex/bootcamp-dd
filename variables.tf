@@ -85,3 +85,28 @@ variable "os_admin_username" {
 variable "disable_password_authentication" {
   default = true
 }
+
+variable "storage_account_tier" {
+  default = "Standard"
+}
+
+variable "storage_account_replication_type" {
+  default = "LRS"
+}
+
+variable "container_access_type" {
+  default = "container"
+}
+
+variable "storage_blob_type" {
+  default = "Block"
+}
+
+variable "storage_blob_source" {
+  default = "bootcamp-installnginx.sh"
+}
+
+variable "storage_account_kind" {
+  default = "StorageV2"
+}
+

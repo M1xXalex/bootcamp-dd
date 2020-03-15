@@ -1,7 +1,7 @@
 # Configure the Azure Provider
 provider "azurerm" {
   # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
-  version = "=2.0.0"
+  version = "=2.1.0"
   features {}
 }
 
@@ -57,6 +57,52 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+resource "azurerm_network_security_group" "nsg" {
+  name                = "${var.prefix}-nsg"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "nsg1-ssh"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "nsg2-http"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "outbound-https"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "443"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  tags = {
+    environment = "Development"
+  }
+}
+
 resource "azurerm_virtual_machine" "vm" {
   name                  = "${var.prefix}-vm"
   location              = azurerm_resource_group.rg.location
@@ -90,10 +136,56 @@ resource "azurerm_virtual_machine" "vm" {
     disable_password_authentication = var.disable_password_authentication
     ssh_keys {
       path     = "/home/${var.os_admin_username}/.ssh/authorized_keys"
-      key_data = "TOCOMPLETE"
+      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChe0xfuNe7yJUeB64MBsLjShb7mhdSo0uUwAUNbvxoKu1yZXBeCZLec9uHD1jJW0RpVniB0pz/fVIeCSKsbdMOAsWHDtV/bv7TTuzYVnEbN4KrAT3WykTMdzAJEwspO5h41r6mKhn2xzkuPiJRqqmP6odDgYXbzo8gpSqZbohIq+8dhIZ5FBYwjcNU8EBZYKaCLwcsp5njF8vwzwTJr6A0fPMrynuZErEw4kqsxHBeaxRIGVHecqwci6agkG+64jFrMUOVDrwMYrR24TgeuAE6ycnQ8bU60YlHbJfWe/95PzF53Z/3fDC/sBX4mVmtAEQI2CFty7v8hey8+7v9Tylj aparaschiv@ROAPARASCHIV03M"
     }
   } 
   tags = {
     environment = "Development"
   }
+}
+
+resource "azurerm_storage_account" "bootcampstg" {
+  name                     = "${var.prefix}stg639"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = var.storage_account_tier
+  account_kind             = var.storage_account_kind
+  account_replication_type = var.storage_account_replication_type
+}
+
+resource "azurerm_storage_container" "bootcampstgcon" {
+  name                  = "${var.prefix}stgcon"
+  storage_account_name  = azurerm_storage_account.bootcampstg.name
+  container_access_type = var.container_access_type
+}
+
+resource "azurerm_storage_blob" "install_nginx" {
+  name                   = "${var.prefix}-installnginx.sh"
+  storage_account_name   = azurerm_storage_account.bootcampstg.name
+  storage_container_name = azurerm_storage_container.bootcampstgcon.name
+  type                   = var.storage_blob_type
+  source                 = var.storage_blob_source
+}
+
+resource "azurerm_virtual_machine_extension" "install-nginx" {
+  name                 = "${var.prefix}-extension"
+  virtual_machine_id   = azurerm_virtual_machine.vm.id
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
+
+  settings = <<SETTINGS
+    {
+        "fileUris": ["https://bootcampstg639.blob.core.windows.net/bootcampstgcon/bootcamp-installnginx.sh"],
+        "commandToExecute": "sh bootcamp-installnginx.sh"
+    }
+SETTINGS
+
+
+  tags = {
+    environment = "Development"
+  }
+  depends_on = [
+    azurerm_storage_blob.install_nginx,
+  ]
 }
