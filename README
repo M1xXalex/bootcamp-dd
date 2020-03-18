@@ -5,6 +5,7 @@
 
 #3.Terraform steps to run to provision the infrastructure.
 chmod +x deploy.sh; ./deploy.sh
+#3.1.To test, get the public ip of the vm and check if the main nginx page is available.
 
 #4.Terraform step to run to destroy the infrastructure.
 chmod +x destroy.sh; ./destroy.sh
