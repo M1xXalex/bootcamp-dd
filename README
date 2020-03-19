@@ -1,10 +1,8 @@
-#1.Fill your public key inside the terraform scripts in case you need to ssh inside the virtual machine.
-
-#2.Create storage account to store the tfstate by using az cli (this will be performed for a single time).
+#1.Make sure you have the storage account to store the tfstate by using az cli (this will be performed for a single time).
 ./create_storage_account.sh bootcamptfstatestg westeurope Standard_LRS tfstate bootcamp-terraform westeurope
 
-#3.Terraform steps to run to provision the infrastructure.
+#2.Terraform steps to run to provision the infrastructure.
 chmod +x deploy.sh; ./deploy.sh
 
-#4.Terraform step to run to destroy the infrastructure.
+#3.Terraform step to run to destroy the infrastructure.
 chmod +x destroy.sh; ./destroy.sh

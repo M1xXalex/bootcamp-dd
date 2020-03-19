@@ -10,6 +10,6 @@ terraform {
     resource_group_name  = "bootcamp-terraform"
     storage_account_name = "bootcamptfstatestg"
     container_name       = "tfstate"
-    key                  = "bootcampdev.tfstate"
+    key                  = "bootcampmodules.tfstate"
   }
 }
