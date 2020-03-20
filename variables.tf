@@ -95,3 +95,6 @@ variable "storage_account_kind" {
   type       = string
 }
 
+variable "key_data" {
+  type        = string
+}
