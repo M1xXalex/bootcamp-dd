@@ -1,5 +1,5 @@
 #1.Make sure you have the storage account to store the tfstate by using az cli (this will be performed for a single time).
-./create_storage_account.sh bootcamptfstatestg westeurope Standard_LRS tfstate bootcamp-terraform westeurope
+./create_storage_account.sh <FILL_WITH_UNIQ_STG_NAME> westeurope Standard_LRS tfstate bootcamp-terraform westeurope
 
 #2.Terraform steps to run to provision the infrastructure.
 chmod +x deploy.sh; ./deploy.sh
