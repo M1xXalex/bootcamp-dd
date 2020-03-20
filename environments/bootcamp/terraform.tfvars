@@ -21,3 +21,4 @@ storage_blob_type = "Block"
 storage_blob_source = "./modules/vm/bootcamp-installnginx.sh"
 storage_account_kind = "StorageV2"
 key_data = "FILL_WITH_THE_PUBLIC_KEY"
+stgsuffix = "FILL_WITH_YOUR_UNIQ_STG_SUFFIX" #Example stg23
