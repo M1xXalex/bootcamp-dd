@@ -2,7 +2,7 @@
 
 #2.Create storage account to store the tfstate by using az cli (this will be performed for a single time).
 ./create_storage_account.sh <FILL_WITH_A_UNIQ_NAME> westeurope Standard_LRS tfstate bootcamp-terraform westeurope
-#2.1 Replace in site.tf the FILL_WITH_THE_UNIQ_STORAGE_NAME under terraform {
+#2.1. Replace in site.tf the FILL_WITH_THE_UNIQ_STORAGE_NAME under terraform {
   backend "azurerm" {
     resource_group_name  = "bootcamp-terraform"
     storage_account_name = "FILL_WITH_THE_UNIQ_STORAGE_NAME"
@@ -11,9 +11,15 @@
   }
 }
 
-#3.Terraform steps to run to provision the infrastructure.
-chmod +x deploy.sh; ./deploy.sh
-#3.1.To test, get the public ip of the vm and check if the main nginx page is available.
+#3. Give a uniq name for the storage account in /modules/vm/main.tf
+resource "azurerm_storage_account" "bootcampstg" {
+  name                     = "${var.prefix}stg639"
+#3.1 Replace the uniq name also for the follwing URL:
+"fileUris": ["https://bootcampstg639.blob.core.windows.net/bootcampstgcon/bootcamp-installnginx.sh"],
 
-#4.Terraform step to run to destroy the infrastructure.
+#4.Terraform steps to run to provision the infrastructure.
+chmod +x deploy.sh; ./deploy.sh
+#4.1.To test, get the public ip of the vm and check if the main nginx page is available.
+
+#5.Terraform step to run to destroy the infrastructure.
 chmod +x destroy.sh; ./destroy.sh
