@@ -11,11 +11,7 @@
   }
 }
 
-#3. Give a uniq name for the storage account in /modules/vm/main.tf
-resource "azurerm_storage_account" "bootcampstg" {
-  name                     = "${var.prefix}stg639"
-#3.1 Replace the uniq name also for the follwing URL:
-"fileUris": ["https://bootcampstg639.blob.core.windows.net/bootcampstgcon/bootcamp-installnginx.sh"],
+#3. Give a uniq name for the storage account suffix in /environments/bootcamp/terraform.tfvars
 
 #4.Terraform steps to run to provision the infrastructure.
 chmod +x deploy.sh; ./deploy.sh
