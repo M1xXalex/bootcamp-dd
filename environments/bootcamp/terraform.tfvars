@@ -1,3 +1,4 @@
+# This file will overwrite the default values
 environment_name = "bootcamp"
 location = "West Europe"
 account_kind = "StorageV2"
