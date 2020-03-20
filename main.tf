@@ -22,5 +22,6 @@ module "vm_module" {
   storage_blob_type                = var.storage_blob_type
   storage_blob_source              = var.storage_blob_source
   storage_account_kind             = var.storage_account_kind
+  key_data                         = var.key_data
 
 }
