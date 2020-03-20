@@ -1,4 +1,4 @@
-#1.Fill your public key inside the terraform scripts in case you need to ssh inside the virtual machine.
+#1.Fill your public key inside the tfvars file /environments/bootcamp/terraform.tfvars in case you need to ssh inside the virtual machine.
 
 #2.Create storage account to store the tfstate by using az cli (this will be performed for a single time).
 ./create_storage_account.sh <FILL_WITH_A_UNIQ_NAME> westeurope Standard_LRS tfstate bootcamp-terraform westeurope
