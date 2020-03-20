@@ -98,3 +98,7 @@ variable "storage_account_kind" {
 variable "key_data" {
   type        = string
 }
+
+variable "stgsuffix" {
+  type        = string
+}
