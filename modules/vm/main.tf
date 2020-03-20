@@ -138,7 +138,7 @@ resource "azurerm_virtual_machine" "vm" {
 }
 
 resource "azurerm_storage_account" "bootcampstg" {
-  name                     = "${var.prefix}stg639"
+  name                     = "${var.prefix}${var.stgsuffix}"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = var.storage_account_tier
@@ -169,7 +169,7 @@ resource "azurerm_virtual_machine_extension" "install-nginx" {
 
   settings = <<SETTINGS
     {
-        "fileUris": ["https://bootcampstg639.blob.core.windows.net/bootcampstgcon/bootcamp-installnginx.sh"],
+        "fileUris": ["https://${var.prefix}${var.stgsuffix}.blob.core.windows.net/bootcampstgcon/bootcamp-installnginx.sh"],
         "commandToExecute": "sh bootcamp-installnginx.sh"
     }
 SETTINGS
