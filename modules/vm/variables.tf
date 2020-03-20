@@ -116,3 +116,8 @@ variable "storage_account_kind" {
   default     = "StorageV2"
 }
 
+variable "key_data" {
+  type        = string
+  default     = "FILL_WITH_YOUR_PUBLIC_KEY"
+}
+
