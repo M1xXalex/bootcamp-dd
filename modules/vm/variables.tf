@@ -121,3 +121,7 @@ variable "key_data" {
   default     = "FILL_WITH_YOUR_PUBLIC_KEY"
 }
 
+variable "stgsuffix" {
+  type        = string
+  default     = "FILL_WITH_YOUR_UNIQ_STG_SUFFIX"
+}
