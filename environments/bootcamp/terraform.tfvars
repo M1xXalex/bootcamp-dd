@@ -1,3 +1,4 @@
+# This file will overwrite the default values
 prefix = "bootcamp"
 location = "West Europe"
 vm_size = "Standard_B1ls"
