@@ -8,7 +8,7 @@ provider "azurerm" {
 terraform {
   backend "azurerm" {
     resource_group_name  = "bootcamp-terraform"
-    storage_account_name = "bootcamptfstatestg"
+    storage_account_name = "FILL_WITH_THE_UNIQ_STORAGE_NAME"
     container_name       = "tfstate"
     key                  = "bootcampmodules.tfstate"
   }
